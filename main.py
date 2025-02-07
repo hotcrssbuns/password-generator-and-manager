@@ -1,13 +1,15 @@
-from ultils import clear_screen
+from utils import clear_screen
+from ui import Command_parser
+from ui import Menus
 
 
 def main():
+    menu = Menus()
+    menu.main_menu()
     while True:
-        print("Welcome to hotcrssbuns' Password Manager!")
-        print("\n1. Generate new password")
-        print("2. View saved passwords")
-        print("3. Exit")
-        choice = input("\nChoose an option (1-3): ")
+        choice = input("\n> ")
+        parser = Command_parser(choice, menu)
+        parser.parse_command()
 
 
 main()
