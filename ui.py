@@ -45,11 +45,11 @@ class Menus:
     def main_menu(self):
         self.menu = "main_menu"
         clear_screen()
-        print("Welcome to hotcrssbuns' Password Manager!")
+        print("=== HOTCRSSBUNS' PASS MANAGER ===")
         print("\n1. Generate new password")
         print("2. View saved passwords")
         print("3. Exit")
-        print("\nChoose an option (1-3)")
+        print("\nChoose an option (1-3):")
 
     def pass_gen_menu(self):
         self.menu = "pass_gen_menu"
@@ -58,10 +58,11 @@ class Menus:
         print("\nInclude:")
         print("1. Letters and Numbers (e.g., ab12CD34)")
         print("2. Letters, Numbers, and Symbols (e.g., ab12#$CD)")
-        print("\n3. Back to main menu")
+        print("3. Back to main menu")
         print("\nChoose option (1-2):")
 
     def saved_pass_menu(self):
         self.menu = "saved_pass_menu"
         clear_screen()
         print("=== Saved Passwords===")
+        print("\nChoose password to view (n-n):")
