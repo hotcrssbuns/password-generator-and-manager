@@ -4,17 +4,38 @@ import sys
 
 class Command_parser:
     def __init__(self, input, menu):
-        self.input = input.strip().lower()
+        self.input = input.strip().lower() if input else None
         self.menu = menu
 
     def parse_command(self):
         if self.menu.menu == "main_menu":
-            if input == "1":
+            if self.input == "1":
+                self.input = None
                 self.menu.pass_gen_menu()
-            if input == "2":
+            if self.input == "2":
+                self.input = None
                 self.menu.saved_pass_menu()
-            if input == "3":
+            if self.input == "3":
                 sys.exit()
+
+        if self.menu.menu == "pass_gen_menu":
+            if self.input == "1":
+                self.input = None
+                print("1")
+            if self.input == "2":
+                self.input = None
+                print("2")
+            if self.input == "3":
+                self.input = None
+                self.menu.main_menu()
+
+        if self.menu.menu == "saved_pass_menu":
+            if self.input == "1":
+                self.input = None
+                print("1")
+
+    def update_input(self, new_input):
+        self.input = new_input.strip().lower()
 
 
 class Menus:
@@ -37,6 +58,7 @@ class Menus:
         print("\nInclude:")
         print("1. Letters and Numbers (e.g., ab12CD34)")
         print("2. Letters, Numbers, and Symbols (e.g., ab12#$CD)")
+        print("\n3. Back to main menu")
         print("\nChoose option (1-2):")
 
     def saved_pass_menu(self):

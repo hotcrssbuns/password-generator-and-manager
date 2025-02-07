@@ -5,10 +5,11 @@ from ui import Menus
 
 def main():
     menu = Menus()
+    parser = Command_parser(None, menu)
     menu.main_menu()
     while True:
         choice = input("\n> ")
-        parser = Command_parser(choice, menu)
+        parser.update_input(choice)
         parser.parse_command()
 
 
