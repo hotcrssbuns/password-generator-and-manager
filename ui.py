@@ -3,9 +3,10 @@ import sys
 
 
 class Command_parser:
-    def __init__(self, input, menu):
+    def __init__(self, input, menu, pass_gen):
         self.input = input.strip().lower() if input else None
         self.menu = menu
+        self.pass_gen = pass_gen
 
     def parse_command(self):
         if self.menu.menu == "main_menu":
@@ -21,10 +22,10 @@ class Command_parser:
         if self.menu.menu == "pass_gen_menu":
             if self.input == "1":
                 self.input = None
-                print("1")
+                print(self.pass_gen.create_password_num_let())
             if self.input == "2":
                 self.input = None
-                print("2")
+                print(self.pass_gen.create_password_num_let_sym())
             if self.input == "3":
                 self.input = None
                 self.menu.main_menu()
@@ -39,8 +40,9 @@ class Command_parser:
 
 
 class Menus:
-    def __init__(self):
+    def __init__(self, pass_gen):
         self.menu = "main_menu"
+        self.pass_gen = pass_gen
 
     def main_menu(self):
         self.menu = "main_menu"
@@ -55,6 +57,7 @@ class Menus:
         self.menu = "pass_gen_menu"
         clear_screen()
         print("=== Password Generator ===")
+        print(f"\nPassword length (8-16 characters): {self.pass_gen.pass_length}")
         print("\nInclude:")
         print("1. Letters and Numbers (e.g., ab12CD34)")
         print("2. Letters, Numbers, and Symbols (e.g., ab12#$CD)")
