@@ -33,9 +33,9 @@ class Command_parser:
                 self.menu.main_menu()
 
         if self.menu.menu == "saved_pass_menu":
-            if self.input == "1":
+            if self.input:
                 self.input = None
-                print("1")
+                self.menu.main_menu()
 
     def update_input(self, new_input):
         self.input = new_input.strip().lower()
@@ -70,9 +70,13 @@ class Menus:
         self.menu = "saved_pass_menu"
         clear_screen()
         print("=== Saved Passwords===\n")
-        f = open("passwords.txt", "r")
-        print(f.read())
-        print("\nChoose password to view (n-n):")
+        try:
+            f = open("passwords.txt", "r")
+            print(f.read())
+            print("\nChoose password to view (n-n):")
+        except FileNotFoundError:
+            print("No passwords found. Try making some!")
+            print("Type 1 to continue")
 
     def new_pass_menu(self, password):
         self.menu = "new_pass_menu"
@@ -86,3 +90,5 @@ class Menus:
             f.write(f"App: {website}\nUsername: {username}\nPassword: {password}\n\n")
             f.close()
             print(f"Password saved succesfully! (Press enter to return to menu)")
+        if choice == "n":
+            self.pass_gen_menu()
