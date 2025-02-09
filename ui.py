@@ -73,10 +73,10 @@ class Menus:
         try:
             f = open("passwords.txt", "r")
             print(f.read())
-            print("\nChoose password to view (n-n):")
+            print("Type '1' to go back to main menu")
         except FileNotFoundError:
             print("No passwords found. Try making some!")
-            print("Type 1 to continue")
+            print("Type '1' to go back to main menu")
 
     def new_pass_menu(self, password):
         self.menu = "new_pass_menu"
@@ -87,8 +87,9 @@ class Menus:
             website = input("Enter website or app name: ")
             username = input("Enter username: ")
             f = open("passwords.txt", "a")
-            f.write(f"App: {website}\nUsername: {username}\nPassword: {password}\n\n")
+            f.write(f"App: {website}\nUsername: {username}\nPassword: {password}\n")
             f.close()
-            print(f"Password saved succesfully! (Press enter to return to menu)")
+            input(f"\nPassword saved succesfully! (Press enter to return to menu)")
+            self.main_menu()
         if choice == "n":
             self.pass_gen_menu()
