@@ -22,10 +22,12 @@ class Command_parser:
         if self.menu.menu == "pass_gen_menu":
             if self.input == "1":
                 self.input = None
-                print(self.pass_gen.create_password_num_let())
+                password = self.pass_gen.create_password_num_let()
+                self.menu.new_pass_menu(password)
             if self.input == "2":
                 self.input = None
-                print(self.pass_gen.create_password_num_let_sym())
+                password = self.pass_gen.create_password_num_let_sym()
+                self.menu.new_pass_menu(password)
             if self.input == "3":
                 self.input = None
                 self.menu.main_menu()
@@ -67,5 +69,20 @@ class Menus:
     def saved_pass_menu(self):
         self.menu = "saved_pass_menu"
         clear_screen()
-        print("=== Saved Passwords===")
+        print("=== Saved Passwords===\n")
+        f = open("passwords.txt", "r")
+        print(f.read())
         print("\nChoose password to view (n-n):")
+
+    def new_pass_menu(self, password):
+        self.menu = "new_pass_menu"
+        clear_screen()
+        print(f"\nYour new password is: {password}")
+        choice = input("\nWould you like to save this password? (y/n): ")
+        if choice == "y":
+            website = input("Enter website or app name: ")
+            username = input("Enter username: ")
+            f = open("passwords.txt", "a")
+            f.write(f"App: {website}\nUsername: {username}\nPassword: {password}\n\n")
+            f.close()
+            print(f"Password saved succesfully! (Press enter to return to menu)")
